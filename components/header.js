@@ -1,5 +1,3 @@
-console.log("header js...");
-
 const signupBtn = document.querySelector(".signup-btn");
 const loginBtn = document.querySelector(".login-btn");
 const authModal = document.getElementById("authModal");
@@ -93,10 +91,7 @@ userAvatar.addEventListener("click", function (e) {
 
 // Close dropdown when clicking outside
 document.addEventListener("click", function (e) {
-  if (
-    !userAvatar.contains(e.target) &&
-    !userDropdown.contains(e.target)
-  ) {
+  if (!userAvatar.contains(e.target) && !userDropdown.contains(e.target)) {
     userDropdown.classList.remove("show");
   }
 });

@@ -1,4 +1,4 @@
-class AppSidebar extends HTMLElement {
+class AppFooter extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -6,18 +6,11 @@ class AppSidebar extends HTMLElement {
 
   async connectedCallback() {
     const [cssTexts, htmlText] = await Promise.all([
-      this.loadMultipleFiles([
-        "./../../css/components.css",
-        "./../../css/layout.css",
-        "./../../css/reset.css",
-        "./../../css/responsive.css",
-        "./../../css/variables.css",
-      ]),
-      this.loadFile("./app-sidebar.html"),
+      this.loadMultipleFiles([]),
+      this.loadFile("./app-footer.html"),
     ]);
 
     this.shadowRoot.innerHTML = `
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
       <style>
         ${cssTexts.join("\n")}
       </style>
@@ -40,4 +33,4 @@ class AppSidebar extends HTMLElement {
   }
 }
 
-customElements.define("app-sidebar", AppSidebar);
+customElements.define("app-footer", AppFooter);

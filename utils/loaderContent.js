@@ -26,12 +26,17 @@ const headerContainer = document.querySelector("#header-container");
 const pathHeader = "./../components/header.html";
 const pathHeaderJS = "./../components/header.js";
 
-sendRequest("GET", pathHeader, function (responseText) {
-  headerContainer.innerHTML = responseText;
+sendRequest(
+  "GET",
+  pathHeader,
+  function (responseText) {
+    headerContainer.innerHTML = responseText;
 
-  // Load lại script để gắn event cho nút
-  const script = document.createElement("script");
-  script.src = pathHeaderJS;
-  script.type = "module"; // nếu authen.js dùng module
-  document.body.appendChild(script);
-}, pathHeaderJS);
+    // Load lại script để gắn event cho nút
+    const script = document.createElement("script");
+    script.src = pathHeaderJS;
+    script.type = "module"; // nếu authen.js dùng module
+    document.body.appendChild(script);
+  },
+  pathHeaderJS
+);
