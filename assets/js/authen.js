@@ -1,21 +1,55 @@
-// import component
-import "./components/app-container.js";
-import "./components/sidebar/app-sidebar.js";
-import "./components/footer/app-footer.js";
-import "./components/today-biggest-hits/today-biggest-hits.js";
-import "./components/popular-artists/popular-artists.js";
+import endpoints from "./../../../utils/endpoints.js";
+import { toast } from "./../../../utils/toast.js";
+import {
+  setItemStorage,
+  clearStorage
+} from '../../utils/storage.js';
 
-// Auth Modal Functionality
+
+
+// Service Authentication
+import { loginUser, registerUser, logout } from "./authen-service.js";
+
 document.addEventListener("DOMContentLoaded", function () {
   // Get DOM elements
   const signupBtn = document.querySelector(".signup-btn");
   const loginBtn = document.querySelector(".login-btn");
-  const authModal = document.getElementById("authModal");
-  const modalClose = document.getElementById("modalClose");
-  const signupForm = document.getElementById("signupForm");
-  const loginForm = document.getElementById("loginForm");
-  const showLoginBtn = document.getElementById("showLogin");
-  const showSignupBtn = document.getElementById("showSignup");
+  const authModal = document.querySelector("#authModal");
+  const modalClose = document.querySelector("#modalClose");
+  const signupForm = document.querySelector("#signupForm");
+  const loginForm = document.querySelector("#loginForm");
+  const showLoginBtn = document.querySelector("#showLogin");
+  const showSignupBtn = document.querySelector("#showSignup");
+  const authButtons = document.querySelector(".auth-buttons");
+  const logoutBtn = document.querySelector("#logoutBtn");
+  const userDropdown = document.getElementById("userDropdown");
+
+  if (!signupBtn) return;
+
+  // Function to show / hide `eye password` icon;
+  function bindTogglePassword() {
+    const eyeToggles = document.querySelectorAll(".input-with-eye .eye-toggle");
+
+    eyeToggles.forEach((toggle) => {
+      const icon = toggle.querySelector(".icon-eye");
+      const input = toggle.closest(".input-with-eye")?.querySelector("input");
+
+      if (!icon || !input) return;
+
+      const clonedToggle = toggle.cloneNode(true);
+      toggle.parentNode.replaceChild(clonedToggle, toggle);
+
+      clonedToggle.addEventListener("click", () => {
+        const isPassword = input.type === "password";
+        input.type = isPassword ? "text" : "password";
+
+        icon.classList.toggle("fa-eye", !isPassword);
+        icon.classList.toggle("fa-eye-slash", isPassword);
+
+        input.focus();
+      });
+    });
+  }
 
   // Function to show signup form
   function showSignupForm() {
@@ -38,12 +72,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // Open modal with Sign Up form when clicking Sign Up button
   signupBtn.addEventListener("click", function () {
     showSignupForm();
+    bindTogglePassword();
     openModal();
   });
 
   // Open modal with Login form when clicking Login button
   loginBtn.addEventListener("click", function () {
     showLoginForm();
+    bindTogglePassword();
     openModal();
   });
 
@@ -85,7 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .querySelector(".auth-form-content")
     .addEventListener("submit", async function (e) {
       e.preventDefault();
-
       const authButtons = document.querySelector(".auth-buttons");
       const userMenu = document.querySelector(".user-menu");
       const email = document.querySelector("#loginEmail").value;
@@ -102,6 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
           endpoints.authLogin,
           credentials
         );
+        console.log("access_token", access_token);
 
         if (user) {
           toast({
@@ -137,7 +173,9 @@ document.addEventListener("DOMContentLoaded", function () {
   signupForm
     .querySelector(".auth-form-content")
     .addEventListener("submit", async (e) => {
+
       e.preventDefault();
+      console.log("submit");
 
       const email = document.querySelector("#signupEmail").value;
       const password = document.querySelector("#signupPassword").value;
@@ -192,45 +230,4 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "/";
     }
   });
-});
-
-// User Menu Dropdown Functionality;
-document.addEventListener("DOMContentLoaded", function () {
-  const userAvatar = document.getElementById("userAvatar");
-  const userDropdown = document.getElementById("userDropdown");
-  const logoutBtn = document.getElementById("logoutBtn");
-
-  // Toggle dropdown when clicking avatar
-  userAvatar.addEventListener("click", function (e) {
-    e.stopPropagation();
-    userDropdown.classList.toggle("show");
-  });
-
-  // Close dropdown when clicking outside
-  document.addEventListener("click", function (e) {
-    if (!userAvatar.contains(e.target) && !userDropdown.contains(e.target)) {
-      userDropdown.classList.remove("show");
-    }
-  });
-
-  // Close dropdown when pressing Escape
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && userDropdown.classList.contains("show")) {
-      userDropdown.classList.remove("show");
-    }
-  });
-
-  // Handle logout button click
-  logoutBtn.addEventListener("click", function () {
-    // Close dropdown first
-    userDropdown.classList.remove("show");
-
-    console.log("Logout clicked");
-    // TODO: Students will implement logout logic here
-  });
-});
-
-// Other functionality
-document.addEventListener("DOMContentLoaded", function () {
-  // TODO: Implement other functionality here
 });

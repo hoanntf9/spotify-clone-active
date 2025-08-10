@@ -11,11 +11,11 @@ class PopularArtists extends HTMLElement {
   async connectedCallback() {
     const [cssTexts, htmlText] = await Promise.all([
       this.loadMultipleFiles([
-        "./../../css/components.css",
-        "./../../css/layout.css",
-        "./../../css/reset.css",
-        "./../../css/responsive.css",
-        "./../../css/variables.css",
+        "./../../assets/css/components.css",
+        "./../../assets/css/layout.css",
+        "./../../assets/css/reset.css",
+        "./../../assets/css/responsive.css",
+        "./../../assets/css/variables.css",
       ]),
       this.loadFile("./popular-artists.html"),
     ]);

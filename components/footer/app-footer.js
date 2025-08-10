@@ -1,4 +1,3 @@
-import { store } from "./../../store.js";
 class AppFooter extends HTMLElement {
   constructor() {
     super();

@@ -3,6 +3,7 @@ const endpoints = {
   tracks: "/tracks",
   artists: "/artists",
   albums: "/albums",
+  authLogin: "/auth/login",
   authRegister: "/auth/register",
 };
 

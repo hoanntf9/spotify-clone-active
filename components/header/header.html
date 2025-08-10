@@ -2,7 +2,9 @@
   <div class="search-container">
     <div class="search-box">
       <button class="home-btn">
-        <i class="fas fa-home"></i>
+        <a href="/">
+          <i class="fas fa-home"></i>
+        </a>
       </button>
       <div class="search-input-wrapper">
         <i class="fas fa-search search-icon"></i>
@@ -11,20 +13,61 @@
     </div>
   </div>
   <div class="header-actions">
-    <div class="auth-buttons">
+    <div class="auth-buttons" id="auth-buttons">
       <button class="auth-btn signup-btn">Sign up</button>
       <button class="auth-btn login-btn">Log in</button>
     </div>
-    <div class="user-menu">
+    <div class="user-menu" id="user-menu">
       <button class="user-avatar" id="userAvatar">
-        <img src="placeholder.svg?height=32&width=32" alt="User Avatar" />
+        <img src="https://www.w3schools.com/howto/img_avatar.png" id="user-avatar-img" alt="avatar" />
       </button>
-      <div class="user-dropdown" id="userDropdown">
-        <div class="dropdown-item" id="logoutBtn">
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Log out</span>
+
+      <ul class="user-dropdown" id="userDropdown">
+        <li class="dropdown-item" title="Account">
+          <a href="#">
+            <span>Account</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+
+        </li>
+
+        <li class="dropdown-item" title="Profile">
+          <a href="./profile.html">
+            <span>Profile</span>
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </li>
+
+        <div class="dropdown-item" title="Support">
+          <a href="#">
+            <span>Support</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
         </div>
-      </div>
+        </a>
+
+        <div class="dropdown-item" title="Download">
+          <a href="#">
+            <span>Download</span>
+            <i class="fa-solid fa-download"></i>
+          </a>
+
+        </div>
+
+        <div class="dropdown-item divider" title="Setting">
+          <a href="#">
+            <span>Setting</span>
+            <i class="fa-solid fa-gear"></i>
+          </a>
+
+        </div>
+
+        <div class="dropdown-item" id="logoutBtn" title="Log out">
+          <a href="#">
+            <span>Log out</span>
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </a>
+        </div>
+      </ul>
     </div>
   </div>
 </header>
