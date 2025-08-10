@@ -23,8 +23,8 @@ function sendRequest(method, url, callback, jsPath = null) {
 
 const headerContainer = document.querySelector("#header-container");
 
-const pathHeader = "./../components/header.html";
-const pathHeaderJS = "./../components/header.js";
+const pathHeader = "./../components/header/header.html";
+const pathHeaderJS = "./../components/header/header.js";
 
 sendRequest(
   "GET",

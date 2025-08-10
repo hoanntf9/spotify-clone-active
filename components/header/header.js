@@ -7,10 +7,6 @@ const loginForm = document.getElementById("loginForm");
 const showLoginBtn = document.getElementById("showLogin");
 const showSignupBtn = document.getElementById("showSignup");
 
-// if (!signupBtn) {
-//   return;
-// };
-
 // Function to show signup form
 function showSignupForm() {
   signupForm.style.display = "block";
@@ -37,7 +33,6 @@ signupBtn.addEventListener("click", function () {
 
 // Open modal with Login form when clicking Login button
 loginBtn.addEventListener("click", function () {
-  console.log("click....");
   showLoginForm();
   openModal();
 });
