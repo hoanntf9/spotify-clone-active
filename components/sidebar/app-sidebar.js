@@ -1,7 +1,12 @@
+import { store } from "./../../store.js";
+import httpRequest from "./../../utils/httpRequest.js";
+import endpoints from "./../../utils/endpoints.js";
+
 class AppSidebar extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this.unsubscribe = null;
   }
 
   async connectedCallback() {
@@ -23,6 +28,31 @@ class AppSidebar extends HTMLElement {
       </style>
       ${htmlText}
     `;
+
+    // Lắng nghe store
+    let prevPlaylists = null;
+    this.unsubscribe = store.subscribe((state) => {
+      if (state.playlists !== prevPlaylists) {
+        prevPlaylists = state.playlists;
+        this.renderPlaylist(state.playlists || []);
+      }
+    });
+
+    // Lấy dữ liệu ban đầu
+    // let playlists = store.get("playlists");
+    // if (playlists && playlists.length > 0) {
+    //   this.renderPlaylist(playlists);
+    // } else {
+    //   console.log("Chưa có dữ liệu playlists");
+    // }
+  }
+
+  disconnectedCallback() {
+    if (this.unsubscribe) return this.unsubscribe();
+  }
+
+  renderPlaylist(playlists) {
+    console.log("playlist render...", playlists);
   }
 
   async loadFile(path) {

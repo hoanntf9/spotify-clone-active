@@ -1,4 +1,5 @@
 // import component
+import "./components/app-container.js";
 import "./components/sidebar/app-sidebar.js";
 import "./components/footer/app-footer.js";
 
