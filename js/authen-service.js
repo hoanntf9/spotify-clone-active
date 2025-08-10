@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Open modal with Login form when clicking Login button
   loginBtn.addEventListener("click", function () {
-    console.log("click....");
     showLoginForm();
     openModal();
   });
