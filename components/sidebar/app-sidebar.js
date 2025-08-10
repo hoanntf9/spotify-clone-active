@@ -1,6 +1,7 @@
 import { store } from "./../../store.js";
-import httpRequest from "./../../utils/httpRequest.js";
-import endpoints from "./../../utils/endpoints.js";
+import { escapeHtml } from './../../utils/common.js';
+// import httpRequest from "./../../utils/httpRequest.js";
+// import endpoints from "./../../utils/endpoints.js";
 
 class AppSidebar extends HTMLElement {
   constructor() {
@@ -32,6 +33,7 @@ class AppSidebar extends HTMLElement {
     // Lắng nghe store
     let prevPlaylists = null;
     this.unsubscribe = store.subscribe((state) => {
+      console.log(state.playlists);
       if (state.playlists !== prevPlaylists) {
         prevPlaylists = state.playlists;
         this.renderPlaylist(state.playlists || []);
@@ -50,9 +52,30 @@ class AppSidebar extends HTMLElement {
   disconnectedCallback() {
     if (this.unsubscribe) return this.unsubscribe();
   }
-
   renderPlaylist(playlists) {
-    console.log("playlist render...", playlists);
+    const libraryContent = this.shadowRoot.querySelector(".library-content");
+
+    const html = playlists.map((playlist, index) => {
+      return `
+        <div class="library-item">
+          <div class="item-img">
+            <img src=${escapeHtml(playlist.image_url ? playlist.image_url : "./../../placeholder.svg")} alt="Đen" class="item-image" />
+            <div class="icon-play">
+              <i class="play fa-solid fa-play"></i>
+            </div>
+          </div>
+
+          <div class="item-info">
+            <div class="item-title">${escapeHtml(playlist.name)}</div>
+            <div class="item-subtitle">
+              <span class="item-subtitle-text">Playlist • ${escapeHtml(playlist.user_username ? playlist.user_username : "Han")}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    libraryContent.innerHTML = html;
   }
 
   async loadFile(path) {
