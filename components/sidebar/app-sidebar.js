@@ -37,11 +37,6 @@ class AppSidebar extends HTMLElement {
         this.renderPlaylist(playlists);
       }
     });
-
-    // 2. Lắng nghe khi playlists thay đổi tracks
-    this.unsubscribe = store.subscribe("tracks", function (tracks) {
-      console.log("tracks", tracks);
-    });
   }
   disconnectedCallback() {
     if (this.unsubscribe) return this.unsubscribe();

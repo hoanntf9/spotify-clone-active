@@ -1,7 +1,7 @@
-import { store } from "./../../store.js";
-import { escapeHtml } from './../../utils/common.js';
+import { store } from "../../store.js";
+import { escapeHtml } from '../../utils/common.js';
 
-class TodayBiggestHits extends HTMLElement {
+class PopularArtists extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -17,7 +17,7 @@ class TodayBiggestHits extends HTMLElement {
         "./../../css/responsive.css",
         "./../../css/variables.css",
       ]),
-      this.loadFile("./today-biggest-hits.html"),
+      this.loadFile("./popular-artists.html"),
     ]);
 
     this.shadowRoot.innerHTML = `
@@ -29,10 +29,10 @@ class TodayBiggestHits extends HTMLElement {
     `;
 
 
-    // 1. Lắng nghe khi playlists thay đổi playlists
-    this.unsubscribe = store.subscribe("playlists", (playlists) => {
-      if (playlists.length) {
-        this.renderTodayBiggestHits(playlists);
+    // 1. Lắng nghe khi artists thay đổi artists
+    this.unsubscribe = store.subscribe("artists", (artists) => {
+      if (artists.length) {
+        this.renderPopularArtists(artists);
       }
     });
   }
@@ -41,27 +41,27 @@ class TodayBiggestHits extends HTMLElement {
     if (this.unsubscribe) return this.unsubscribe();
   }
 
-  renderTodayBiggestHits(playlists) {
-    const hitsGrid = this.shadowRoot.querySelector("#hits-grid");
+  renderPopularArtists(artists) {
+    const artistsGrid = this.shadowRoot.querySelector("#artists-grid");
 
-    const html = playlists.map((playlist, index) => {
+    const html = artists.map((artist, index) => {
       return `
-        <div class="hit-card">
-          <div class="hit-card-cover">
-            <img src=${escapeHtml(playlist.image_url ? playlist.image_url : "./../../placeholder.svg")} alt=${playlist?.image_url} />
-            <button class="hit-play-btn">
+        <div class="artist-card">
+          <div class="artist-card-cover">
+            <img src=${escapeHtml(artist.image_url ? artist.image_url : "./../../placeholder.svg")}  alt="Đen" />
+            <button class="artist-play-btn">
               <i class="fas fa-play"></i>
             </button>
           </div>
-          <div class="hit-card-info">
-            <h3 class="hit-card-title">Flowers</h3>
-            <p class="hit-card-artist">Miley Cyrus</p>
+          <div class="artist-card-info">
+            <h3 class="artist-card-name">${escapeHtml(artist.name)}</h3>
+            <p class="artist-card-type">Artist</p>
           </div>
         </div>
       `;
     }).join("");
 
-    hitsGrid.innerHTML = html;
+    artistsGrid.innerHTML = html;
   }
 
   async loadFile(path) {
@@ -79,4 +79,4 @@ class TodayBiggestHits extends HTMLElement {
   }
 }
 
-customElements.define("today-biggest-hits", TodayBiggestHits);
+customElements.define("popular-artists", PopularArtists);

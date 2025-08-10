@@ -3,6 +3,7 @@ import "./components/app-container.js";
 import "./components/sidebar/app-sidebar.js";
 import "./components/footer/app-footer.js";
 import "./components/today-biggest-hits/today-biggest-hits.js";
+import "./components/popular-artists/popular-artists.js";
 
 // Auth Modal Functionality
 document.addEventListener("DOMContentLoaded", function () {

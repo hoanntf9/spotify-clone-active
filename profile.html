@@ -31,24 +31,9 @@
                 <!-- Today's Biggest Hits Section -->
                 <section class="hits-section">
                     <div class="section-header">
-                        <h2 class="section-heading">
-                            Today's biggest hits
-                        </h2>
+                        <h2 class="section-heading">Today's biggest hits</h2>
                     </div>
-                    <div class="hits-grid">
-                        <div class="hit-card">
-                            <div class="hit-card-cover">
-                                <img src="placeholder.svg?height=160&width=160" alt="Flowers" />
-                                <button class="hit-play-btn">
-                                    <i class="fas fa-play"></i>
-                                </button>
-                            </div>
-                            <div class="hit-card-info">
-                                <h3 class="hit-card-title">Flowers</h3>
-                                <p class="hit-card-artist">Miley Cyrus</p>
-                            </div>
-                        </div>
-                    </div>
+                    <today-biggest-hits></today-biggest-hits>
                 </section>
 
                 <!-- Popular Artists Section -->
@@ -56,20 +41,9 @@
                     <div class="section-header">
                         <h2 class="section-heading">Popular artists</h2>
                     </div>
-                    <div class="artists-grid">
-                        <div class="artist-card">
-                            <div class="artist-card-cover">
-                                <img src="placeholder.svg?height=160&width=160" alt="Đen" />
-                                <button class="artist-play-btn">
-                                    <i class="fas fa-play"></i>
-                                </button>
-                            </div>
-                            <div class="artist-card-info">
-                                <h3 class="artist-card-name">Đen</h3>
-                                <p class="artist-card-type">Artist</p>
-                            </div>
-                        </div>
-                    </div>
+
+                    <!-- popular-artists layout -->
+                    <popular-artists></popular-artists>
                 </section>
 
                 <!-- Artist Hero Section -->
@@ -84,9 +58,7 @@
                             <span>Verified Artist</span>
                         </div>
                         <h1 class="artist-name">Đen</h1>
-                        <p class="monthly-listeners">
-                            1,021,833 monthly listeners
-                        </p>
+                        <p class="monthly-listeners">1,021,833 monthly listeners</p>
                     </div>
                 </section>
 
@@ -107,9 +79,7 @@
                                 <img src="placeholder.svg?height=40&width=40" alt="Cho Tôi Lang Thang" />
                             </div>
                             <div class="track-info">
-                                <div class="track-name">
-                                    Cho Tôi Lang Thang
-                                </div>
+                                <div class="track-name">Cho Tôi Lang Thang</div>
                             </div>
                             <div class="track-plays">27,498,341</div>
                             <div class="track-duration">4:18</div>
@@ -126,9 +96,7 @@
                                 <img src="placeholder.svg?height=40&width=40" alt="Lối Nhỏ" />
                             </div>
                             <div class="track-info">
-                                <div class="track-name playing-text">
-                                    Lối Nhỏ
-                                </div>
+                                <div class="track-name playing-text">Lối Nhỏ</div>
                             </div>
                             <div class="track-plays">45,686,866</div>
                             <div class="track-duration">4:12</div>
@@ -161,9 +129,7 @@
             <div class="player-left">
                 <img src="placeholder.svg?height=56&width=56" alt="Current track" class="player-image" />
                 <div class="player-info">
-                    <div class="player-title">
-                        Yêu Một Người Sao Buồn Đến Thế
-                    </div>
+                    <div class="player-title">Yêu Một Người Sao Buồn Đến Thế</div>
                     <div class="player-artist">Noo Phước Thịnh</div>
                 </div>
                 <button class="add-btn">
@@ -233,17 +199,15 @@
 
                 <!-- Sign Up Form -->
                 <div class="auth-form" id="signupForm">
-                    <h1 class="modal-heading">
-                        Sign up to start listening
-                    </h1>
+                    <h1 class="modal-heading">Sign up to start listening</h1>
 
                     <form class="auth-form-content">
-                        <div class="form-group invalid">
+                        <!-- form-group invalid -->
+                        <div class="form-group">
                             <input type="email" placeholder="Email address" class="form-input" id="signupEmail" />
                             <div class="error-message">
                                 <i class="fas fa-info-circle"></i>
-                                <span>Please enter a valid email
-                                    address</span>
+                                <span>Please enter a valid email address</span>
                             </div>
                         </div>
 
@@ -251,21 +215,16 @@
                             <input type="password" placeholder="Password" class="form-input" id="signupPassword" />
                             <div class="error-message">
                                 <i class="fas fa-info-circle"></i>
-                                <span>Password must be at least 8
-                                    characters</span>
+                                <span>Password must be at least 8 characters</span>
                             </div>
                         </div>
 
-                        <button type="submit" class="auth-submit-btn">
-                            Sign Up
-                        </button>
+                        <button type="submit" class="auth-submit-btn">Sign Up</button>
                     </form>
 
                     <div class="auth-switch">
                         <span>Already have an account? </span>
-                        <button class="auth-link" id="showLogin">
-                            Log in here
-                        </button>
+                        <button class="auth-link" id="showLogin">Log in here</button>
                     </div>
                 </div>
 
@@ -274,12 +233,11 @@
                     <h1 class="modal-heading">Log in to Spotify</h1>
 
                     <form class="auth-form-content">
-                        <div class="form-group invalid">
+                        <div class="form-group">
                             <input type="email" placeholder="Email address" class="form-input" id="loginEmail" />
                             <div class="error-message">
                                 <i class="fas fa-info-circle"></i>
-                                <span>Please enter a valid email
-                                    address</span>
+                                <span>Please enter a valid email address</span>
                             </div>
                         </div>
 
@@ -291,16 +249,12 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="auth-submit-btn">
-                            Log In
-                        </button>
+                        <button type="submit" class="auth-submit-btn">Log In</button>
                     </form>
 
                     <div class="auth-switch">
                         <span>Don't have an account? </span>
-                        <button class="auth-link" id="showSignup">
-                            Sign up here
-                        </button>
+                        <button class="auth-link" id="showSignup">Sign up here</button>
                     </div>
                 </div>
             </div>
