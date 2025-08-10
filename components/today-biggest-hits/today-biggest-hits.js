@@ -1,9 +1,7 @@
 import { store } from "./../../store.js";
 import { escapeHtml } from './../../utils/common.js';
-// import httpRequest from "./../../utils/httpRequest.js";
-// import endpoints from "./../../utils/endpoints.js";
 
-class AppSidebar extends HTMLElement {
+class TodayBiggestHits extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -19,7 +17,7 @@ class AppSidebar extends HTMLElement {
         "./../../css/responsive.css",
         "./../../css/variables.css",
       ]),
-      this.loadFile("./app-sidebar.html"),
+      this.loadFile("./today-biggest-hits.html"),
     ]);
 
     this.shadowRoot.innerHTML = `
@@ -34,42 +32,37 @@ class AppSidebar extends HTMLElement {
     // 1. Lắng nghe khi playlists thay đổi playlists
     this.unsubscribe = store.subscribe("playlists", (playlists) => {
       if (playlists.length) {
-        this.renderPlaylist(playlists);
+        this.renderTodayBiggestHits(playlists);
       }
     });
-
-    // 2. Lắng nghe khi playlists thay đổi tracks
-    this.unsubscribe = store.subscribe("tracks", function (tracks) {
-      console.log("tracks", tracks);
-    });
   }
+
   disconnectedCallback() {
     if (this.unsubscribe) return this.unsubscribe();
   }
-  renderPlaylist(playlists) {
-    const libraryContent = this.shadowRoot.querySelector(".library-content");
+
+  renderTodayBiggestHits(playlists) {
+    const hitsGrid = this.shadowRoot.querySelector(".hits-grid");
+    console.log("🚀 ~ TodayBiggestHits ~ renderTodayBiggestHits ~ hitsGrid:", hitsGrid);
 
     const html = playlists.map((playlist, index) => {
       return `
-        <div class="library-item">
-          <div class="item-img">
-            <img src=${escapeHtml(playlist.image_url ? playlist.image_url : "./../../placeholder.svg")} alt="Đen" class="item-image" />
-            <div class="icon-play">
-              <i class="play fa-solid fa-play"></i>
-            </div>
+        <div class="hit-card">
+          <div class="hit-card-cover">
+            <img src=${escapeHtml(playlist.image_url ? playlist.image_url : "./../../placeholder.svg")} alt=${playlist?.image_url} />
+            <button class="hit-play-btn">
+              <i class="fas fa-play"></i>
+            </button>
           </div>
-
-          <div class="item-info">
-            <div class="item-title">${escapeHtml(playlist.name)}</div>
-            <div class="item-subtitle">
-              <span class="item-subtitle-text">Playlist • ${escapeHtml(playlist.user_username ? playlist.user_username : "Han")}</span>
-            </div>
+          <div class="hit-card-info">
+            <h3 class="hit-card-title">Flowers</h3>
+            <p class="hit-card-artist">Miley Cyrus</p>
           </div>
         </div>
       `;
     }).join("");
 
-    libraryContent.innerHTML = html;
+    hitsGrid.innerHTML = html;
   }
 
   async loadFile(path) {
@@ -87,4 +80,4 @@ class AppSidebar extends HTMLElement {
   }
 }
 
-customElements.define("app-sidebar", AppSidebar);
+customElements.define("today-biggest-hits", TodayBiggestHits);

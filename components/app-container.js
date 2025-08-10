@@ -38,13 +38,6 @@ class AppContainer extends HTMLElement {
       store.set("tracks", tracks);
       store.set("artists", artists);
       store.set("albums", albums);
-
-      // this.setState({
-      //   playlists,
-      //   tracks,
-      //   artists,
-      //   albums,
-      // });
     } catch (error) {
       console.error("API Error:", error);
     }

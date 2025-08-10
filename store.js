@@ -1,33 +1,35 @@
 class Store {
   constructor() {
-    this.state = {}; // Lưu dữ liệu
-    this.listeners = new Set();
+    this.state = {
+      playlists: [],
+      tracks: [],
+      artists: [],
+      albums: []
+    };
+    this.listeners = {};
   }
 
-  // Lấy dữ liệu
   get(key) {
     return this.state[key];
   }
 
-  // Set dữ liệu và thông báo
   set(key, value) {
     this.state[key] = value;
-    this.notify();
+    this.notify(key, value);
   }
 
-  // Lắng nghe thay đổi
-  subscribe(callback) {
-    this.listeners.add(callback);
-
-    return () => this.listeners.delete(callback); // Trả hàm huỷ lắng nghe
+  subscribe(key, callback) {
+    if (!this.listeners[key]) this.listeners[key] = new Set();
+    this.listeners[key].add(callback);
+    return () => this.listeners[key].delete(callback);
   }
 
-  // Gọi tất cả listener
-  notify() {
-    this.listeners.forEach((listener) => {
-      listener(this.state);
-    });
+  notify(key, value) {
+    if (this.listeners[key]) {
+      this.listeners[key].forEach(cb => cb(value));
+    }
   }
 }
+
 
 export const store = new Store();

@@ -1,5 +1,4 @@
 import { store } from "./../../store.js";
-console.log(store);
 class AppFooter extends HTMLElement {
   constructor() {
     super();
