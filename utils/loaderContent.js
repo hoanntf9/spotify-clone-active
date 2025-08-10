@@ -38,5 +38,4 @@ sendRequest(
     script.type = "module"; // nếu authen.js dùng module
     document.body.appendChild(script);
   },
-  pathHeaderJS
 );

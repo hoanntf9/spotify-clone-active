@@ -1,14 +1,12 @@
 import endpoints from "./../../../utils/endpoints.js";
-import { toast } from "./../../../utils/toast.js";
+import { toast } from "./../../utils/toast.js";
 import {
   setItemStorage,
   clearStorage
 } from '../../utils/storage.js';
 
-
-
 // Service Authentication
-import { loginUser, registerUser, logout } from "./authen-service.js";
+import { loginUser, registerUser, logout } from "./../../services/authen-service.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   // Get DOM elements
@@ -137,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function () {
           endpoints.authLogin,
           credentials
         );
-        console.log("access_token", access_token);
 
         if (user) {
           toast({
@@ -175,7 +172,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("submit", async (e) => {
 
       e.preventDefault();
-      console.log("submit");
 
       const email = document.querySelector("#signupEmail").value;
       const password = document.querySelector("#signupPassword").value;

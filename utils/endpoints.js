@@ -5,6 +5,7 @@ const endpoints = {
   albums: "/albums",
   authLogin: "/auth/login",
   authRegister: "/auth/register",
+  authLogout: "/auth/logout",
 };
 
 export default endpoints;

@@ -100,9 +100,13 @@
 }
 
 .auth-buttons {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
+  display: none;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.auth-buttons.show {
+  display: flex;
 }
 
 .content-wrapper {

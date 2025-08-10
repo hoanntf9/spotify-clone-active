@@ -1,6 +1,6 @@
 import {
   getItemStorage,
-} from "../../utils/storage.js";
+} from "./../../utils/storage.js";
 
 // User Menu Dropdown Functionality
 document.addEventListener("DOMContentLoaded", function () {
