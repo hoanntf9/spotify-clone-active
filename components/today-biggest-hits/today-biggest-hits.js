@@ -54,8 +54,8 @@ class TodayBiggestHits extends HTMLElement {
             </button>
           </div>
           <div class="hit-card-info">
-            <h3 class="hit-card-title">Flowers</h3>
-            <p class="hit-card-artist">Miley Cyrus</p>
+            <h3 class="hit-card-title">${escapeHtml(playlist.name ? playlist.name : "Han")}</h3>
+            <p class="hit-card-artist">Playlist • ${escapeHtml(playlist.user_username ? playlist.user_username : "Han")}</p>
           </div>
         </div>
       `;

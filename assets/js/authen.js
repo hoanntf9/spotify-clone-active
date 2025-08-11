@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const errorCode = error?.response?.code;
         const errorMessage = error?.response?.message;
 
-        if (errorCode === "INVALID_CREDENTIALS") {
+        if (errorCode === "INVALID_CREDENTIALS" || errorCode === "VALIDATION_ERROR") {
           toast({
             text: errorMessage,
             type: "error",
