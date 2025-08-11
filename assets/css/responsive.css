@@ -25,7 +25,7 @@
 /* Tablet */
 @media (max-width: 1023px) and (min-width: 768px) {
     .app-container {
-        grid-template-columns: 240px 1fr;
+        grid-template-columns: 340px 1fr;
     }
 
     .sidebar {

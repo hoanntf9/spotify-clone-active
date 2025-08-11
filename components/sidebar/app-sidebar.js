@@ -45,11 +45,21 @@ class AppSidebar extends HTMLElement {
     const createMenu = this.shadowRoot.querySelector("#create-menu");
     const createPlaylistBtn = this.shadowRoot.querySelector("#create-item-playlist");
 
+    const recentBtn = this.shadowRoot.querySelector("#recentsBtn");
+    const toolbarMenu = this.shadowRoot.querySelector(".toolbar-menu");
+
+
+    const layoutMenuItems = this.shadowRoot.querySelectorAll(".layout-menu-list-item");
+    const iconRecentBtn = this.shadowRoot.querySelector("#icon-recent-btn");
+
+    const libraryContent = this.shadowRoot.querySelector(".library-content");
+    const libraryItems = this.shadowRoot.querySelectorAll(".library-item");
 
     // Khi click chuột vào nút `create` playlist
     createMenuBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       createMenu.classList.toggle("show");
+      toolbarMenu.classList.remove("show");
     });
 
     // Khi click ra ngoài vùng modal `create` playlist thì đóng modal
@@ -104,12 +114,104 @@ class AppSidebar extends HTMLElement {
       }
     });
 
+    // Xử lý phần recent khi click vào recent thì hiển thị modal recent
+    recentBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      toolbarMenu.classList.toggle("show");
+
+    });
+
+    // Khi click ra ngoài modal recent thì đóng modal
+    window.addEventListener("click", function (e) {
+      // Lấy đường đi của sự kiện xuyên cả shadow DOM
+      const path = e.composedPath();
+
+      if (!path.includes(recentBtn) && !path.includes(toolbarMenu)) {
+        toolbarMenu.classList.remove("show");
+      }
+
+    });
+
+    // Khi nhấn Escape thì modal rencent bị đóng
+    window.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        toolbarMenu.classList.remove("show");
+      }
+    });
+
+    // Xử lý khi click vào từng layout thì layout sẽ thay đổi
+    layoutMenuItems.forEach((layoutItem, index) => {
+      layoutItem.addEventListener("click", function () {
+
+
+        // Khi click vào item layout nào thì active item đó lên
+        layoutMenuItems.forEach(item => item.classList.remove("active"));
+        layoutItem.classList.add("active");
+
+        // Icon layout gần phần recent cũng thay đổi theo
+        const icon = layoutItem.querySelector("i");
+        if (icon && iconRecentBtn) {
+          const classLayoutIcon = icon.className;
+          iconRecentBtn.innerHTML = `<i class="${classLayoutIcon}"></i>`;
+        }
+
+        // Khi click vào từng layout thì bind layout sang giao diện
+
+        const positions = {
+          menuItem1: 1, // List View
+          menuItem2: 2, // Default View(Remove list- view);
+          menuItem3: 3, // Grid View
+          menuItem4: 4, // Compact Grid View
+        };
+
+
+        function resetLibraryView() {
+          libraryContent.classList.remove("grid-view", "compact-grid-view");
+
+          libraryItems.forEach(libraryItem => {
+            libraryItem.classList.remove("list-view", "grid-view", "compact-grid-view");
+          });
+        }
+
+        const positionMenuItem = index + 1;
+        resetLibraryView();
+
+        if (positions.menuItem1 === positionMenuItem) {
+          libraryItems.forEach(libraryItem => {
+            libraryItem.classList.add("list-view");
+          });
+          return;
+        }
+
+        if (positions.menuItem2 === positionMenuItem) {
+          return;
+        }
+
+        if (positions.menuItem3 === positionMenuItem) {
+          libraryContent.classList.add("grid-view");
+
+          libraryItems.forEach(libraryItem => {
+            libraryItem.classList.add("grid-view");
+          });
+          return;
+        }
+
+        if (positions.menuItem4 === positionMenuItem) {
+          libraryContent.classList.add("compact-grid-view");
+          libraryItems.forEach(libraryItem => {
+            libraryItem.classList.add("compact-grid-view");
+          });
+          return;
+        }
+      });
+    });
+
   }
   disconnectedCallback() {
     if (this.unsubscribe) return this.unsubscribe();
   }
   renderPlaylist(playlists) {
-    const libraryContent = this.shadowRoot.querySelector(".library-content");
+    const libraryElement = this.shadowRoot.querySelector("#library-content");
 
     const html = playlists.map((playlist, index) => {
       return `
@@ -131,7 +233,7 @@ class AppSidebar extends HTMLElement {
       `;
     }).join("");
 
-    libraryContent.innerHTML = html;
+    libraryElement.innerHTML = html;
   }
 
   async loadFile(path) {

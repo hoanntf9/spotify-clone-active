@@ -67,17 +67,76 @@
       <button class="nav-tab">Artists</button>
     </div>
 
+    <!-- Search Library -->
     <div class="search-library">
       <button class="search-library-btn">
         <i class="fas fa-search"></i>
       </button>
-      <button class="sort-btn">
-        Recents
-        <i class="fas fa-list"></i>
-      </button>
+      <div class="sort-btn">
+        <button class="sort-btn-text" id="recentsBtn">Recents</button>
+        <span class="sort-btn-icon" id="icon-recent-btn" id="icon-layout-recent">
+          <i class="fas fa-list"></i>
+        </span>
+        <div class="toolbar-menu">
+          <ul class="sort-menu">
+            <h3 class="sort-menu-title">Sort by</h3>
+
+            <li class="sort-menu-item active">
+              <p class="sort-menu-item-name">Recents</p>
+              <div class="sort-menu-icon">
+                <i class="fa-solid fa-check"></i>
+              </div>
+            </li>
+
+            <li class="sort-menu-item">
+              <p class="sort-menu-item-name">Recently Added</p>
+              <div class="sort-menu-icon">
+                <i class="fa-solid fa-check"></i>
+              </div>
+            </li>
+
+            <li class="sort-menu-item">
+              <p class="sort-menu-item-name">Alphabetical</p>
+              <div class="sort-menu-icon">
+                <i class="fa-solid fa-check"></i>
+              </div>
+            </li>
+
+            <li class="sort-menu-item">
+              <p class="sort-menu-item-name">Creator</p>
+              <div class="sort-menu-icon">
+                <i class="fa-solid fa-check"></i>
+              </div>
+            </li>
+          </ul>
+
+          <div class="layout-menu">
+            <h3 class="layout-menu-name">View as</h3>
+
+            <!-- Tab menu -->
+            <ul class="layout-menu-list">
+              <li class="layout-menu-list-item active">
+                <i class="fa-solid fa-bars"></i>
+              </li>
+
+              <li class="layout-menu-list-item">
+                <i class="fa-solid fa-list-ul"></i>
+              </li>
+
+              <li class="layout-menu-list-item">
+                <i class="fa-solid fa-table-cells"></i>
+              </li>
+
+              <li class="layout-menu-list-item">
+                <i class="fa-solid fa-table-cells-large"></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="library-content">
+    <div class="library-content" id="library-content">
       <div class="library-item active">
         <div class="item-icon liked-songs">
           <i class="fas fa-heart"></i>
